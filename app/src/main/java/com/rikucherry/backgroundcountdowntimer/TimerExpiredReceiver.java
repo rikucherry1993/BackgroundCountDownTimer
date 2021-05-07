@@ -20,7 +20,7 @@ public class TimerExpiredReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(TIMER_CHANNEL_ID, TIMER_CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
             channel.enableLights(true);
@@ -32,10 +32,10 @@ public class TimerExpiredReceiver extends BroadcastReceiver {
 
 
         Intent contentIntent = new Intent(context, MainActivity.class);
-        PendingIntent contentPendingIntent = PendingIntent.getActivity(context,TIMER_ID,contentIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentPendingIntent = PendingIntent.getActivity(context, TIMER_ID, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent deleteIntent = new Intent(ACTION_DELETE_NOTIFICATION);
-        PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, TIMER_ID,deleteIntent,PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, TIMER_ID, deleteIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, TIMER_CHANNEL_ID);

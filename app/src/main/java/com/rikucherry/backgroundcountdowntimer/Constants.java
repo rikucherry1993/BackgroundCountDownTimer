@@ -1,6 +1,7 @@
 package com.rikucherry.backgroundcountdowntimer;
 
 public class Constants {
+
     public static final String TIMER_REMAIN_TIME = "com.rikucherry.backgroundcountdowntimer.REMAIN_TIME";
     public static final String TIMER_SET_TIME = "com.rikucherry.backgroundcountdowntimer.SET_TIME";
     public static final String TIMER_CHANNEL_ID = "com.rikucherry.backgroundcountdowntimer.CHANNEL_ID";

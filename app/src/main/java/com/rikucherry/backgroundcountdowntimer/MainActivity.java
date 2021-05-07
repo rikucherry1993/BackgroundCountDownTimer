@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 resetTimer();
-                Toast.makeText(MainActivity.this,"Timer expired!!!", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Timer expired!!!", Toast.LENGTH_LONG).show();
             }
         }.start();
     }
@@ -90,13 +90,13 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         // 获取上次离开时的剩余时间，设置提醒的时间以及当前时间
         SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
-        long lastRemainTimeMilli = preference.getLong(TIMER_REMAIN_TIME,0);
+        long lastRemainTimeMilli = preference.getLong(TIMER_REMAIN_TIME, 0);
         long lastSetTimeMilli = preference.getLong(TIMER_SET_TIME, 0);
         long pastTimeMilli = System.currentTimeMillis() - lastSetTimeMilli;
 
         if (lastSetTimeMilli <= 0) {// 上一次离开时计时器未启动
             // Do nothing
-        } else if (pastTimeMilli < lastRemainTimeMilli){ // 计时器已启动且计时未完成
+        } else if (pastTimeMilli < lastRemainTimeMilli) { // 计时器已启动且计时未完成
             remainTimeMilli = lastRemainTimeMilli - pastTimeMilli;
             state = STATE.STARTED;
             startTimer();
@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
             resetTimer();
         }
 
-        // todo : 取消alarm和通知
         if (alarmManager != null) {
             removeAlarm();
         }
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             timer.cancel();
             SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
             preference.edit().putLong(TIMER_REMAIN_TIME, remainTimeMilli).apply();
-            preference.edit().putLong(TIMER_SET_TIME,System.currentTimeMillis()).apply();
+            preference.edit().putLong(TIMER_SET_TIME, System.currentTimeMillis()).apply();
 
             //设置计时提醒
             setAlarm();
@@ -150,30 +149,30 @@ public class MainActivity extends AppCompatActivity {
         displayTime.setText(String.format("%02d:%02d", minutes, seconds));
     }
 
-    private void setAlarm(){
+    private void setAlarm() {
         long alarmTime = System.currentTimeMillis() + remainTimeMilli;
         alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, TimerExpiredReceiver.class);
-        PendingIntent pending = PendingIntent.getBroadcast(this,123,intent,0);
+        PendingIntent pending = PendingIntent.getBroadcast(this, 123, intent, 0);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTime, pending);
     }
 
-    private void removeAlarm(){
+    private void removeAlarm() {
         Intent intent = new Intent(this, TimerExpiredReceiver.class);
-        PendingIntent pending = PendingIntent.getBroadcast(this,123,intent,0);
+        PendingIntent pending = PendingIntent.getBroadcast(this, 123, intent, 0);
         alarmManager.cancel(pending);
     }
 
-    private void updateButton(){
+    private void updateButton() {
         switch (state) {
             case STARTED:
                 startButton.setEnabled(false);
                 resetButton.setEnabled(true);
-            break;
+                break;
             case STOPPED:
                 startButton.setEnabled(true);
                 resetButton.setEnabled(false);
-            break;
+                break;
         }
 
     }
@@ -182,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction() == ACTION_DELETE_NOTIFICATION) {
+            if (intent.getAction() == ACTION_DELETE_NOTIFICATION) {
                 resetTimer();
                 updateButton();
             }
