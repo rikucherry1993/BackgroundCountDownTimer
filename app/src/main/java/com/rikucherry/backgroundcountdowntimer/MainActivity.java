@@ -1,7 +1,5 @@
 package com.rikucherry.backgroundcountdowntimer;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -16,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import static com.rikucherry.backgroundcountdowntimer.Constants.ACTION_DELETE_NOTIFICATION;
 import static com.rikucherry.backgroundcountdowntimer.Constants.TIMER_REMAIN_TIME;
 import static com.rikucherry.backgroundcountdowntimer.Constants.TIMER_SET_TIME;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private NotificationReceiver mReceiver = new NotificationReceiver();
     private CountDownTimer timer;
 
-    private final long initialTimeMilli = 10_000; //初设时长1分钟
+    private final long initialTimeMilli = 60_000; //初设时长1分钟
     private long remainTimeMilli = initialTimeMilli; //剩余时间
 
     private enum STATE {
