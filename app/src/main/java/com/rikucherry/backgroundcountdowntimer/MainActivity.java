@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         if (alarmManager != null) {
             removeAlarm();
         }
-        preference.edit().clear();
+        preference.edit().clear().apply();
     }
 
     @Override
